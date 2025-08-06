@@ -1,0 +1,11 @@
+robot:
+  name: Hello Python Robot
+
+tasks:
+  Run Python Script:
+    command:
+      - python
+      - main.py
+
+condaConfigFile: conda.yaml
+artifactsDir: output
