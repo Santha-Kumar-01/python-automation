@@ -1,54 +1,33 @@
-# # main.py
-# def main():
-#     print("Hello from Robocorp Python robot!")
-
-# if __name__ == "__main__":
-#     main()
-
-# from RPA.Browser.Selenium import Selenium
-# import time
-
-# browser = Selenium()
-# browser.open_available_browser("https://google.com")
-# # time.sleep(5)
-# browser.input_text("name=q", "Robocorp")
-# time.sleep(5)
-# browser.press_keys("name=q", "ENTER")
-# time.sleep(5)
-# browser.capture_page_screenshot()
-# time.sleep(5)
-# browser.close_browser()
- 
-
 from RPA.Browser.Selenium import Selenium
 import time
 
-# Initialize browser automation
 browser = Selenium()
 
-# Step 1: Open Google
+# Step 1: Open browser and go to Google
 browser.open_available_browser("https://www.google.com")
 browser.maximize_browser_window()
 
-# Step 2: Wait until the visible search input is ready
-browser.wait_until_element_is_visible("name=q", timeout=10)
-
-# Step 3: Input the search term
-browser.input_text("name=q", "Robocorp")
+# Step 2: Wait until the visible search input field is present
+search_box_xpath = '//textarea[@name="q"]'
+browser.wait_until_element_is_visible(search_box_xpath, timeout=10)
 time.sleep(3)
 
-# Step 4: Press ENTER to search
-browser.press_keys("name=q", "ENTER")
+# Step 3: Type into search box
+browser.input_text(search_box_xpath, "Robocorp")
 time.sleep(3)
 
-# Step 5: Wait for the search results to load
+# Step 4: Submit the search
+browser.press_keys(search_box_xpath, "ENTER")
+time.sleep(3)
+
+# Step 5: Wait for results page
 browser.wait_until_page_contains("Robocorp", timeout=10)
 time.sleep(3)
 
-# Step 6: Take a screenshot of the search results
+# Step 6: Capture screenshot
 browser.capture_page_screenshot("google_search_results.png")
 time.sleep(3)
 
-# Step 7: Close the browser
+# Step 7: Close browser
 browser.close_browser()
  
